@@ -7,15 +7,19 @@
 //
 
 import Foundation
+import UIKit
 
 protocol MainControllerProtocol {
     func viewDidLoad()
+	func setupBottomSheet()
 }
 
 protocol MainInteractorInputProtocol {}
 
 protocol MainInteractorOutputProtocol: AnyObject {}
 
-protocol MainPresenterOutputProtocol: AnyObject {}
+protocol MainPresenterOutputProtocol: AnyObject {
+	func presentBottomSheet(vc: UIViewController)
+}
 
 protocol MainRouterProtocol {}

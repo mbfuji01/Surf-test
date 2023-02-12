@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class MainPresenter: MainControllerProtocol, MainInteractorOutputProtocol {
     var interactor: MainInteractorInputProtocol?
@@ -18,7 +19,30 @@ class MainPresenter: MainControllerProtocol, MainInteractorOutputProtocol {
     
     // MARK: - MainControllerProtocol
     
-    func viewDidLoad() {}
+	func viewDidLoad() {
+		setupBottomSheet()
+	}
+	
+	internal func setupBottomSheet() {
+		let bottomSheet = BottomSheetAssembly().assembleVc()
+		let navigationVC = UINavigationController(rootViewController: bottomSheet)
+		navigationVC.isModalInPresentation = true
+		if let sheet = navigationVC.sheetPresentationController {
+			sheet.detents = [
+				.custom { context in
+					return context.maximumDetentValue * 0.37
+				},
+				.custom { context in
+					return context.maximumDetentValue * 0.62
+				},
+				.large()
+			]
+//			sheet.selectedDetentIdentifier = .medium
+			sheet.largestUndimmedDetentIdentifier = .large
+			sheet.preferredCornerRadius = 32
+		}
+		output?.presentBottomSheet(vc: navigationVC)
+	}
     
     // MARK: - MainInteractorOutputProtocol
 }

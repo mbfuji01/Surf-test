@@ -29,7 +29,6 @@ class MainViewController: UIViewController, MainPresenterOutputProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         controller?.viewDidLoad()
-		
 		setupViews()
 		setConstraints()
     }
@@ -44,4 +43,7 @@ class MainViewController: UIViewController, MainPresenterOutputProtocol {
     
     // MARK: - ItemsPresenterOutputProtocol
     
+	func presentBottomSheet(vc: UIViewController) {
+		   present(vc, animated: true, completion: nil)
+	}
 }
